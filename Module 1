@@ -5,8 +5,7 @@ import sys
 import time
 import datetime as da
 
-Checkup = "04:27 PM"
-
+Checkup = "30"
 
 
 print("Hello ") + (getpass.getuser()) + (",")
@@ -16,13 +15,12 @@ print("")
 print("This machine got a ")  + (platform.machine()) + (platform.processor()) + (" processor.")
 
 def Check():
-    now = da.datetime.now().strftime("%I:%M %p")
+    now = da.datetime.now().strftime("%M")
     print("Testing ...")
     time.sleep(5)
     while True:
         if now == Checkup:
             print("Pizza Time")
-
             time.sleep(55)
             Check()
         else:
