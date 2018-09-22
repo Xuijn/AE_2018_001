@@ -5,7 +5,7 @@ import sys
 import time
 import datetime as da
 
-Checkup = "03:54 PM"
+Checkup = "04:27 PM"
 
 
 
@@ -18,16 +18,17 @@ print("This machine got a ")  + (platform.machine()) + (platform.processor()) + 
 def Check():
     now = da.datetime.now().strftime("%I:%M %p")
     print("Testing ...")
+    time.sleep(5)
     while True:
         if now == Checkup:
             print("Pizza Time")
 
-            time.sleep(60)
+            time.sleep(55)
             Check()
         else:
             print("Not Yet ready")
             print("it is now ") + (now) + (" The Next Pizza Time will be at ") + (Checkup)
-            time.sleep(60)
+            time.sleep(55)
             Check()
 Check()
 
