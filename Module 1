@@ -1,34 +1,94 @@
+#!/usr/bin/env python
+
+#imports needed to function
+
 import getpass
 import os
 import platform
 import sys
 import time
 import datetime as da
+import os.path
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+import Module_2
 
-Checkup = "30"
+#Variables
 
+User = getpass.getuser()
+Checkup1 = "01"
+Checkup2 = "15"
+Checkup3 = "30"
+Checkup4 = "45"
+
+
+#System Information Displayed once on Startup.
 
 print("Hello ") + (getpass.getuser()) + (",")
-print("you are currently working in the ") + (os.getcwd()) + (" directory.")
-print("The current Python version is: ") + (platform.python_version()) + (", installed on ") + (platform.system())
 print("")
-print("This machine got a ")  + (platform.machine()) + (platform.processor()) + (" processor.")
+print("You are currently working in the ") + (os.getcwd()) + (" directory.")
+print("")
+print("The current Python version is: ") + (platform.python_version()) + (", installed on ") + (platform.system())  + (".")
+print("")
+print("This machine has a ")  + (platform.machine()) + (platform.processor()) + (" processor.")
+print("")
+#Version
+
+print("Version 0.2 Alpha")
+print("")
+#Logging Function used to confirm the start of the Script, might not bee needed later
+
+def AutoLog():
+    f= open("/home/%s/Python/Started Succesfully.txt" % User ,"w+" )
+    f.write("Automatic System Check has Started Sucessfully")
+    f.close()
+AutoLog()
+
+#Logging Function showing the minute of active Testing of System components
+
+def TestPizza():
+    f= open("/home/%s/Python/Guess_what_Time_it_is.txt" % User,"w+")
+    f.write("Pizza Time!")
+    f.close()
+
+#Function to remove previous logging File after the active phase has ended
+
+def RemoveFile():
+    os.remove("/home/%s/Python/Guess_what_Time_it_is.txt" % User)
+    time.sleep(55)
+    Check()
+
+#Main Function used to Check to current Time and compare them to our predetermined Variables
 
 def Check():
     now = da.datetime.now().strftime("%M")
     print("Testing ...")
+    print("")
     time.sleep(5)
     while True:
-        if now == Checkup:
+        if now in (Checkup1, Checkup2, Checkup3, Checkup4):
             print("Pizza Time")
+            print("")
+            TestPizza()
+            #Placeholder for the actual Checking Function
+            #
+            #Module 2 Send an E-Mail as an Soft Limit
+            Module_2.Mail()
             time.sleep(55)
             Check()
+
         else:
             print("Not Yet ready")
-            print("it is now ") + (now) + (" The Next Pizza Time will be at ") + (Checkup)
-            time.sleep(55)
-            Check()
+            print("")
+            print("it is now ") + (now) + (" The Next Pizza Time will be at ") + (Checkup1) + (" , ") + (Checkup2) + (" , ") + (Checkup3) + (" or ") + (Checkup4)
+            if os.path.exists("/home/%s/Python/Guess_what_Time_it_is.txt" % User) == True:
+                RemoveFile()
+
+
+
+            else:
+                time.sleep(55)
+                Check()
+
 Check()
-
-
-print("Version 0.1.1 Alpha")
