@@ -1,0 +1,25 @@
+#!/usr/bin/env python
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
+def Mail():
+    msg = MIMEMultipart()
+    message = "I wanted to infrom you That the Soft Limit of (Function to check) has been reached.\n \n I would advise you to check (certain function) as to not hit a hard Limit. \n \n Your's Sincerly, \n \n Your Python Script"
+
+    password = "sudo kill me"
+    msg['From'] = "autocheckuppython@gmail.com"
+    msg['To'] = "vladio91@web.de"
+    msg['Subject'] = "Soft Limit Reach"
+
+    msg.attach(MIMEText(message, 'plain'))
+
+    server = smtplib.SMTP('smtp.gmail.com: 587')
+    server.starttls()
+    server.login(msg['From'], password)
+
+    server.sendmail(msg['From'], msg['To'], msg.as_string())
+
+    server.quit()
+
+    print("sucessfully sent email to %s" % (msg['To']))
