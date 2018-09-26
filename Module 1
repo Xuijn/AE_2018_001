@@ -35,7 +35,7 @@ print("This machine has a ")  + (platform.machine()) + (platform.processor()) + 
 print("")
 #Version
 
-print("Version 0.2 Alpha")
+print("Version 0.2.1 Alpha")
 print("")
 #Logging Function used to confirm the start of the Script, might not bee needed later
 
